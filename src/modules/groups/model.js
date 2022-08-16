@@ -16,6 +16,10 @@ const UPDATE_GROUPS = `
  Update groups set group_name = $1, university_id = $2, faculty_id = $3, direction_id = $4 where group_id = $5
 `;
 
+const DELETE_GROUPS = `
+Delete from groups where group_id = $1
+`;
+
 const allGroups = () => fetchData(ALL_GROUPS);
 const selectedGroup = (groupId) => fetchData(SELECTED_GROUP, groupId);
 const postGroup = async (name, universityId, facultyId, directionId) => {
@@ -36,9 +40,12 @@ const postGroup = async (name, universityId, facultyId, directionId) => {
 const updateGroups = (name, universityId, facultyId, directionI, id) =>
   fetchData(UPDATE_GROUPS, name, universityId, facultyId, directionI, id);
 
+const deleteGroups = (id) => fetchData(DELETE_GROUPS, id);
+
 module.exports = {
   allGroups,
   selectedGroup,
   postGroup,
   updateGroups,
+  deleteGroups,
 };

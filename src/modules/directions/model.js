@@ -16,6 +16,10 @@ const UPDATE_DIRECTION = `
  Update directions set direction_name = $1, university_id = $2, faculty_id = $3 where direction_id = $4
 `;
 
+const DELETE_DIRECTION = `
+Delete from directions where direction_id = $1
+`;
+
 const allDirections = () => fetchData(ALL_DIRECTIONS);
 const selectedDirection = (directionId) =>
   fetchData(SELECTED_DIRECTION, directionId);
@@ -36,9 +40,12 @@ const postDirection = async (name, universityId, facultyId) => {
 const updateDirection = (name, universityId, facultyId, id) =>
   fetchData(UPDATE_DIRECTION, name, universityId, facultyId, id);
 
+const deleteDirection = (id) => fetchData(DELETE_DIRECTION, id);
+
 module.exports = {
   allDirections,
   selectedDirection,
   postDirection,
   updateDirection,
+  deleteDirection,
 };

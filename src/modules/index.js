@@ -29,6 +29,11 @@ router
   .put("/directions", directions.Update)
   .put("/faculties", faculties.Update)
   .put("/universities", universities.Update)
-  .put("/groups", groups.Update);
+  .put("/groups", groups.Update)
+  .delete("/schedules", schedules.Delete)
+  .delete("/directions", directions.Delete)
+  .delete("/faculties", faculties.Delete)
+  .delete("/universities", universities.Delete)
+  .delete("/groups", groups.Delete);
 
 module.exports = router;

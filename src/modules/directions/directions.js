@@ -45,17 +45,30 @@ module.exports = {
   Update: async (req, res) => {
     const { id, name, universityId, facultyId } = req.body;
     try {
-      const Name = name ? name : "directions.direction_name";
-      const UniversityId = universityId
-        ? universityId
-        : "directions.university_id";
-      const FacultyId = facultyId ? facultyId : "directions.faculty_id";
+      const [oldData] = await model.selectedDirection(id);
+
+      const Name = name ? name : oldData.direction_name;
+      const UniversityId = universityId ? universityId : oldData.university_id;
+      const FacultyId = facultyId ? facultyId : oldData.faculty_id;
 
       await model.updateDirection(Name, UniversityId, FacultyId, id);
 
       res.json({
         status: 200,
         message: "Updated",
+      });
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  },
+  Delete: async (req, res) => {
+    const { id } = req.body;
+    try {
+      await model.deleteDirection(id);
+
+      res.json({
+        status: 200,
+        message: "Deleted",
       });
     } catch (err) {
       res.sendStatus(500);

@@ -41,16 +41,29 @@ module.exports = {
   Update: async (req, res) => {
     const { id, name, universityId } = req.body;
     try {
-      const Name = name ? name : "faculties.faculty_name";
-      const UniversityId = universityId
-        ? universityId
-        : "faculties.university_id";
+      const [oldData] = await model.selectedFaculty(id);
+
+      const Name = name ? name : oldData.faculty_name;
+      const UniversityId = universityId ? universityId : oldData.university_id;
 
       await model.updateFaculty(Name, UniversityId, id);
 
       res.json({
         status: 200,
         message: "Updated",
+      });
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  },
+  Delete: async (req, res) => {
+    const { id } = req.body;
+    try {
+      await model.deleteFaculty(id);
+
+      res.json({
+        status: 200,
+        message: "Deleted",
       });
     } catch (err) {
       res.sendStatus(500);

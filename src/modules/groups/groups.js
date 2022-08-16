@@ -45,17 +45,32 @@ module.exports = {
   Update: async (req, res) => {
     const { id, name, universityId, facultyId, directionId } = req.body;
     try {
-      const Name = name ? name : "groups.group_name";
-      const UniversityId = universityId ? universityId : "groups.university_id";
-      const FacultyId = facultyId ? facultyId : "groups.faculty_id";
+      const [oldData] = await model.selectedGroup(id);
 
-      const DirectionId = directionId ? directionId : "groups.direction_id";
+      const Name = name ? name : oldData.group_name;
+      const UniversityId = universityId ? universityId : oldData.university_id;
+      const FacultyId = facultyId ? facultyId : oldData.faculty_id;
+
+      const DirectionId = directionId ? directionId : oldData.direction_id;
 
       await model.updateGroups(Name, UniversityId, FacultyId, DirectionId, id);
 
       res.json({
         status: 200,
         message: "Updated",
+      });
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  },
+  Delete: async (req, res) => {
+    const { id } = req.body;
+    try {
+      await model.deleteGroups(id);
+
+      res.json({
+        status: 200,
+        message: "Deleted",
       });
     } catch (err) {
       res.sendStatus(500);
