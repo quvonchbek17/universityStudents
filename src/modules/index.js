@@ -10,6 +10,7 @@ const users = require("./users/users");
 const login = require("./login/login")
 
 router
+  .get("/", (req, res) => res.send("ok"))
   .get("/universities", universities.GetAll)
   .get("/faculties", faculties.GetAll)
   .get("/directions", directions.GetAll)
