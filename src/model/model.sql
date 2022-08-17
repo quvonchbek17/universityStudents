@@ -71,3 +71,13 @@ CREATE TABLE schedules(
         ON DELETE CASCADE
 
 );
+
+CREATE TABLE facultyandsiteadmins(
+    admin_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    admin_name VARCHAR(60),
+    admin_password VARCHAR(60),
+    faculty_id uuid,
+        FOREIGN KEY(faculty_id)
+        REFERENCES faculties(faculty_id)
+        ON DELETE CASCADE
+);

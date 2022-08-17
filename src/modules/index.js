@@ -7,6 +7,7 @@ const directions = require("./directions/directions");
 const groups = require("./groups/groups");
 const schedules = require("./schedules/schedules");
 const users = require("./users/users");
+const login = require("./login/login")
 
 router
   .get("/universities", universities.GetAll)
@@ -15,6 +16,7 @@ router
   .get("/schedules", schedules.GetAll)
   .get("/groups", groups.GetAll)
   .get("/users", users.GetAll)
+  .post("/login", login.token)
   .post("/selecteduniversity", universities.GetSelected)
   .post("/selectedfaculty", faculties.GetSelected)
   .post("/selecteddirection", directions.GetSelected)
