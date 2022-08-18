@@ -18,10 +18,6 @@ CREATE TABLE faculties(
 CREATE TABLE directions(
     direction_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     direction_name VARCHAR(255),
-    university_id uuid,
-        FOREIGN KEY(university_id)
-        REFERENCES universities(university_id)
-        ON DELETE CASCADE,
     faculty_id uuid,
         FOREIGN KEY(faculty_id)
         REFERENCES faculties(faculty_id)
@@ -31,14 +27,6 @@ CREATE TABLE directions(
 CREATE TABLE groups(
     group_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     group_name VARCHAR(255),
-    university_id uuid,
-        FOREIGN KEY(university_id)
-        REFERENCES universities(university_id)
-        ON DELETE CASCADE,
-    faculty_id uuid,
-        FOREIGN KEY(faculty_id)
-        REFERENCES faculties(faculty_id)
-        ON DELETE CASCADE,
     direction_id uuid,
         FOREIGN KEY(direction_id)
         REFERENCES directions(direction_id)
@@ -46,16 +34,17 @@ CREATE TABLE groups(
 );
 
 
-CREATE TABLE users(
+CREATE TABLE botusers(
     user_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
-    user_chat_id VARCHAR(30),
-    user_name_surname VARCHAR(100),
+    user_chat_id BIGINT NOT NULL UNIQUE,
+    user_full_name VARCHAR(255),
     user_language VARCHAR(20),
+    user_phone_number VARCHAR(30),
+    username VARCHAR(255),
     user_group_id uuid,
         FOREIGN KEY(user_group_id)
         REFERENCES groups(group_id)
         ON DELETE SET NULL
-
 );
 
 CREATE TABLE schedules(
@@ -76,8 +65,23 @@ CREATE TABLE facultyandsiteadmins(
     admin_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     admin_name VARCHAR(60),
     admin_password VARCHAR(60),
+    admin_role VARCHAR(20),
     faculty_id uuid,
         FOREIGN KEY(faculty_id)
         REFERENCES faculties(faculty_id)
         ON DELETE CASCADE
+);
+
+
+CREATE TABLE botadmins(
+    admin_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    admin_chat_id BIGINT NOT NULL UNIQUE,
+    admin_full_name VARCHAR(255),
+    admin_username VARCHAR(100),
+    admin_phone_number VARCHAR(30),
+    admin_language VARCHAR(20),
+    admin_faculty_id uuid,
+        FOREIGN KEY(admin_faculty_id)
+        REFERENCES faculties(faculty_id)
+        ON DELETE SET NULL
 );

@@ -3,22 +3,17 @@ const model = require("./model");
 module.exports = {
   GetAll: async (req, res) => {
     try {
-      const { id } = req.params
-      if(id){
-        res.json(await model.faculties(id))
-      } else {
-        res.json(await model.allFaculties());
-      }
+      res.json(await model.allFaculties());
     } catch (err) {
       res.sendStatus(500);
     }
   },
-  GetSelected: async (req, res) => {
-    const { facultyId } = req.body;
+  GETFaculties: async(req, res) => {
     try {
-      res.json(await model.selectedFaculty(facultyId));
-    } catch (err) {
-      res.sendStatus(500);
+      const { universityId } = req.params
+      res.json(await model.faculties(universityId))
+    } catch (error) {
+      res.status(500)
     }
   },
   Post: async (req, res) => {

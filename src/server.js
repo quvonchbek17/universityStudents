@@ -8,7 +8,7 @@ dotenv.config()
 app.use(express.json())
 app.use(cors())
 app.use(router)
-app.use('/*', (req, res) => res.status(404))
+app.use('/*', (req, res) => res.sendStatus(404))
 const port = process.env.PORT || 8080
 
 app.listen(port)

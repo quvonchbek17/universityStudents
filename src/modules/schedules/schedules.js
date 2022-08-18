@@ -8,14 +8,6 @@ module.exports = {
       res.sendStatus(500);
     }
   },
-  GetSelected: async (req, res) => {
-    const { lessonId } = req.body;
-    try {
-      res.json(await model.selectedLesson(lessonId));
-    } catch (err) {
-      res.sendStatus(500);
-    }
-  },
   Post: async (req, res) => {
     try {
       const { name, teacher, room, day, startTime, groupId } = req.body;

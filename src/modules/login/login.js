@@ -5,7 +5,6 @@ module.exports = {
   token: async(req, res) => {
     try {
       const { adminName, password } = req.body;
-
       const admin = await model.admin(adminName, password)
 
       if (admin.length > 0) {
