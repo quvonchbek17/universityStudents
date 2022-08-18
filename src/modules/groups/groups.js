@@ -8,24 +8,19 @@ module.exports = {
       res.sendStatus(500);
     }
   },
-  GetSelected: async (req, res) => {
-    const { groupId } = req.body;
+  GetGroups: async (req, res) => {
     try {
-      res.json(await model.selectedGroup(groupId));
+      const { directionId } = req.params;
+      res.json(await model.Groups(directionId));
     } catch (err) {
       res.sendStatus(500);
     }
   },
   Post: async (req, res) => {
     try {
-      const { name, universityId, facultyId, directionId } = req.body;
+      const { name,directionId } = req.body;
 
-      const createdGroup = await model.postGroup(
-        name,
-        universityId,
-        facultyId,
-        directionId
-      );
+      const createdGroup = await model.postGroup( name, directionId );
 
       if (createdGroup) {
         res.json({
@@ -43,17 +38,14 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
-    const { id, name, universityId, facultyId, directionId } = req.body;
+    const { id, name, directionId } = req.body;
     try {
       const [oldData] = await model.selectedGroup(id);
 
       const Name = name ? name : oldData.group_name;
-      const UniversityId = universityId ? universityId : oldData.university_id;
-      const FacultyId = facultyId ? facultyId : oldData.faculty_id;
-
       const DirectionId = directionId ? directionId : oldData.direction_id;
 
-      await model.updateGroups(Name, UniversityId, FacultyId, DirectionId, id);
+      await model.updateGroups(Name, DirectionId, id);
 
       res.json({
         status: 200,

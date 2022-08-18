@@ -8,14 +8,6 @@ module.exports = {
       res.sendStatus(500);
     }
   },
-  GetSelected: async (req, res) => {
-    const { universityId } = req.body;
-    try {
-      res.json(await model.selectedUniversities(universityId));
-    } catch (err) {
-      res.sendStatus(500);
-    }
-  },
   Post: async (req, res) => {
     try {
       const { name } = req.body;

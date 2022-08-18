@@ -1,4 +1,5 @@
 const model = require("./model");
+const { verify } = require("../../utils/jwt")
 
 module.exports = {
   GetAll: async (req, res) => {
@@ -8,23 +9,20 @@ module.exports = {
       res.sendStatus(500);
     }
   },
-  GetSelected: async (req, res) => {
-    const { directionId } = req.body;
+  GetDirections: async (req, res) => {
     try {
-      res.json(await model.selectedDirection(directionId));
+      const { token } = req.params;
+      const adminData = verify(token)
+      res.json(await model.Directions(adminData.faculty_id));
     } catch (err) {
       res.sendStatus(500);
     }
   },
   Post: async (req, res) => {
     try {
-      const { name, universityId, facultyId } = req.body;
+      const { name, facultyId } = req.body;
 
-      const createdDirection = await model.postDirection(
-        name,
-        universityId,
-        facultyId
-      );
+      const createdDirection = await model.postDirection(name, facultyId);
 
       if (createdDirection) {
         res.json({
@@ -43,15 +41,14 @@ module.exports = {
   },
 
   Update: async (req, res) => {
-    const { id, name, universityId, facultyId } = req.body;
+    const { id, name, facultyId } = req.body;
     try {
       const [oldData] = await model.selectedDirection(id);
 
       const Name = name ? name : oldData.direction_name;
-      const UniversityId = universityId ? universityId : oldData.university_id;
       const FacultyId = facultyId ? facultyId : oldData.faculty_id;
 
-      await model.updateDirection(Name, UniversityId, FacultyId, id);
+      await model.updateDirection(Name, FacultyId, id);
 
       res.json({
         status: 200,
