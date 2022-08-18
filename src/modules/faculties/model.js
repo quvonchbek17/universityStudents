@@ -4,6 +4,10 @@ const ALL_FACULTIES = `
     Select * from faculties
 `;
 
+const FACULTIES = `
+    Select * from faculties where university_id = $1
+`;
+
 const SELECTED_FACULTY = `
     Select * from faculties where faculty_id = $1
 `;
@@ -21,6 +25,7 @@ Delete from faculties where faculty_id = $1
 `;
 
 const allFaculties = () => fetchData(ALL_FACULTIES);
+const faculties = (id) => fetchData(FACULTIES, id);
 const selectedFaculty = (facultyId) => fetchData(SELECTED_FACULTY, facultyId);
 const postFaculty = async (name, universityId) => {
   const created = await fetchData(
@@ -43,6 +48,7 @@ const deleteFaculty = (id) => fetchData(DELETE_FACULTY, id);
 
 module.exports = {
   allFaculties,
+  faculties,
   selectedFaculty,
   postFaculty,
   updateFaculty,

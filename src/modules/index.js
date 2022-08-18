@@ -11,7 +11,7 @@ const login = require("./login/login")
 
 router
   .get("/universities", universities.GetAll)
-  .get("/faculties", faculties.GetAll)
+  .get("/faculties/:id", faculties.GetAll)
   .get("/directions", directions.GetAll)
   .get("/schedules", schedules.GetAll)
   .get("/groups", groups.GetAll)

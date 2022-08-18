@@ -3,7 +3,12 @@ const model = require("./model");
 module.exports = {
   GetAll: async (req, res) => {
     try {
-      res.json(await model.allFaculties());
+      const { id } = req.params
+      if(id){
+        res.json(await model.faculties(id))
+      } else {
+        res.json(await model.allFaculties());
+      }
     } catch (err) {
       res.sendStatus(500);
     }
