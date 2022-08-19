@@ -58,12 +58,19 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
-      await model.deleteGroups(id);
+      const deleted = await model.deleteGroups(id);
+      if(deleted.group_id){
+        res.json({
+          status: 200,
+          message: "Deleted",
+        });
+      } else {
+        res.json({
+          status: 404,
+          message: "Not deleted. Group not found",
+        });
+      }
 
-      res.json({
-        status: 200,
-        message: "Deleted",
-      });
     } catch (err) {
       res.sendStatus(500);
     }

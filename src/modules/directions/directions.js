@@ -61,12 +61,19 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
-      await model.deleteDirection(id);
+     const deleted = await model.deleteDirection(id);
+      if(deleted.direction_id){
+        res.json({
+          status: 200,
+          message: "Deleted",
+        });
+      } else {
+        res.json({
+          status: 404,
+          message: "Not deleted. Direction not found",
+        });
+      }
 
-      res.json({
-        status: 200,
-        message: "Deleted",
-      });
     } catch (err) {
       res.sendStatus(500);
     }

@@ -21,7 +21,7 @@ const UPDATE_GROUPS = `
 `;
 
 const DELETE_GROUPS = `
-Delete from groups where group_id = $1
+Delete from groups where group_id = $1 returning *
 `;
 
 const allGroups = () => fetchData(ALL_GROUPS);

@@ -59,12 +59,19 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
-      await model.deleteFaculty(id);
-
+     const deleted = await model.deleteFaculty(id);
+     if(deleted.faculty_id){
       res.json({
         status: 200,
         message: "Deleted",
       });
+     } else {
+      res.json({
+        status: 404,
+        message: "Not deleted. Faculty not found",
+      });
+     }
+
     } catch (err) {
       res.sendStatus(500);
     }

@@ -17,7 +17,7 @@ const UPDATE_UNIVERSITY = `
 `;
 
 const DELETE_UNIVERSITY = `
-Delete from universities where university_id = $1 returning *
+  Delete from universities where university_id = $1 returning *
 `;
 
 const allUniversities = () => fetchData(ALL_UNIVERSITIES);

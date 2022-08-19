@@ -21,7 +21,7 @@ const UPDATE_DIRECTION = `
 `;
 
 const DELETE_DIRECTION = `
-Delete from directions where direction_id = $1
+Delete from directions where direction_id = $1 returning *
 `;
 
 const allDirections = () => fetchData(ALL_DIRECTIONS);

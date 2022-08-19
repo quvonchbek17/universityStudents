@@ -50,7 +50,6 @@ module.exports = {
     const { id } = req.body;
     try {
      const deleted = await model.deleteUniversity(id);
-     console.log(deleted);
      if(deleted.university_id){
       res.json({
         status: 200,
@@ -58,7 +57,7 @@ module.exports = {
       });
      } else {
       res.json({
-        status: 500,
+        status: 404,
         message: "Not deleted. University not found"
       })
      }

@@ -16,7 +16,7 @@ const UPDATE_LESSON = `
     Update schedules set lesson_name = $2, lesson_teacher = $3, lesson_room = $4, lesson_day = $5, start_time = $6, group_id = $7 where lesson_id = $1
 `;
 const DELETE_LESSON = `
-Delete from schedules where lesson_id = $1
+Delete from schedules where lesson_id = $1 returning *
 `;
 
 const allLessons = () => fetchData(ALL_SCHEDULES);

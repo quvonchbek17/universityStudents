@@ -21,7 +21,7 @@ const UPDATE_FACULTY = `
 `;
 
 const DELETE_FACULTY = `
-Delete from faculties where faculty_id = $1
+Delete from faculties where faculty_id = $1 returning *
 `;
 
 const allFaculties = () => fetchData(ALL_FACULTIES);
