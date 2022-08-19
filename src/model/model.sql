@@ -24,28 +24,38 @@ CREATE TABLE directions(
         ON DELETE CASCADE
 );
 
+
 CREATE TABLE groups(
     group_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
-    group_name VARCHAR(255),
+    group_name VARCHAR(255)
+);
+
+create table education (
+    education_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    education_name text not null
+);
+
+create table mix(
+    mix_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    course_id uuid,
+        FOREIGN KEY(course_id)
+        REFERENCES courses(course_id)
+        ON DELETE CASCADE,
     direction_id uuid,
         FOREIGN KEY(direction_id)
         REFERENCES directions(direction_id)
+        ON DELETE CASCADE,
+    tizim_id uuid,
+        FOREIGN KEY(tizim_id)
+        REFERENCES tizim(tizim_id)
+        ON DELETE CASCADE,
+    group_id uuid,
+        FOREIGN KEY(group_id)
+        REFERENCES groups(group_id)
         ON DELETE CASCADE
 );
 
 
-CREATE TABLE botusers(
-    user_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
-    user_chat_id BIGINT NOT NULL UNIQUE,
-    user_full_name VARCHAR(255),
-    user_language VARCHAR(20),
-    user_phone_number VARCHAR(30),
-    username VARCHAR(255),
-    user_group_id uuid,
-        FOREIGN KEY(user_group_id)
-        REFERENCES groups(group_id)
-        ON DELETE SET NULL
-);
 
 CREATE TABLE schedules(
     lesson_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
@@ -61,6 +71,19 @@ CREATE TABLE schedules(
 
 );
 
+CREATE TABLE botusers(
+    user_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    user_chat_id BIGINT NOT NULL UNIQUE,
+    user_full_name VARCHAR(255),
+    user_language VARCHAR(20),
+    user_phone_number VARCHAR(30),
+    username VARCHAR(255),
+    user_group_id uuid,
+        FOREIGN KEY(user_group_id)
+        REFERENCES groups(group_id)
+        ON DELETE SET NULL
+);
+
 CREATE TABLE facultyandsiteadmins(
     admin_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     admin_name VARCHAR(60),
@@ -69,6 +92,10 @@ CREATE TABLE facultyandsiteadmins(
     faculty_id uuid,
         FOREIGN KEY(faculty_id)
         REFERENCES faculties(faculty_id)
+        ON DELETE CASCADE,
+    university_id uuid,
+        FOREIGN KEY(university_id)
+        REFERENCES universities(university_id)
         ON DELETE CASCADE
 );
 
@@ -85,3 +112,12 @@ CREATE TABLE botadmins(
         REFERENCES faculties(faculty_id)
         ON DELETE SET NULL
 );
+
+
+INSERT INTO faculties(faculty_name, university_id) VALUES('AMIT', 'unId'), ('Fizika', 'unId'), ('Kimyo', 'unId')
+INSERT INTO directions(direction_name, faculty_id) VALUES('Axborot tizimlari va texnologiyalari', 'AMITID'),('Axborot xavfsizligi', 'AMITID'),('KIDT', 'AMITID'),
+('Amaliy matematika', 'AMITID'),
+
+
+INSERT INTO tizim(tizim_name) VALUES('Kunduzgi'), ('Kechki'), ('Sirtqi');
+INSERT INTO courses(course_number) VALUES(1), (2), (3), (4);

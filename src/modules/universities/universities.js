@@ -49,12 +49,20 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
-      await model.deleteUniversity(id);
-
+     const deleted = await model.deleteUniversity(id);
+     console.log(deleted);
+     if(deleted.university_id){
       res.json({
         status: 200,
         message: "Deleted",
       });
+     } else {
+      res.json({
+        status: 500,
+        message: "Not deleted. University not found"
+      })
+     }
+
     } catch (err) {
       res.sendStatus(500);
     }
