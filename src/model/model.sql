@@ -119,6 +119,7 @@ CREATE TABLE botadmins(
 
 --1
 --2
+--3
 
 
 INSERT INTO faculties(faculty_name, university_id) VALUES('AMIT', 'unId'), ('Fizika', 'unId'), ('Kimyo', 'unId')
