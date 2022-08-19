@@ -117,11 +117,6 @@ CREATE TABLE botadmins(
         ON DELETE SET NULL
 );
 
---1
---2
---3
-
-
 INSERT INTO faculties(faculty_name, university_id) VALUES('AMIT', 'unId'), ('Fizika', 'unId'), ('Kimyo', 'unId')
 INSERT INTO directions(direction_name, faculty_id) VALUES('Axborot tizimlari va texnologiyalari', 'AMITID'),('Axborot xavfsizligi', 'AMITID'),('KIDT', 'AMITID'),
 ('Amaliy matematika', 'AMITID'),

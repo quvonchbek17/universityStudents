@@ -33,7 +33,7 @@ router
   .delete("/schedules", schedules.Delete)
   .delete("/directions", directions.Delete)
   .delete("/faculties", faculties.Delete)
-  .post("/universities/delete", universities.Delete)
+  .delete("/universities", universities.Delete)
   .delete("/groups", groups.Delete);
 
 module.exports = router;
