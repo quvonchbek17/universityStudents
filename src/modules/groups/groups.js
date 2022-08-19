@@ -65,7 +65,7 @@ module.exports = {
     const { id } = req.body;
     try {
       const deleted = await model.deleteGroups(id);
-      if(deleted.group_id){
+      if(deleted[0].group_id){
         res.json({
           status: 200,
           message: "Deleted",

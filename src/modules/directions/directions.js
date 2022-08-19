@@ -62,7 +62,7 @@ module.exports = {
     const { id } = req.body;
     try {
      const deleted = await model.deleteDirection(id);
-      if(deleted.direction_id){
+      if(deleted[0].direction_id){
         res.json({
           status: 200,
           message: "Deleted",

@@ -64,7 +64,7 @@ module.exports = {
     const { id } = req.body;
     try {
       const deleted = await model.deleteLesson(id);
-      if(deleted.lesson_id){
+      if(deleted[0].lesson_id){
         res.json({
           status: 200,
           message: "Deleted",
