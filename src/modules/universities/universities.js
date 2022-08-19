@@ -11,6 +11,14 @@ module.exports = {
   Post: async (req, res) => {
     try {
       const { name } = req.body;
+      
+      if(name == ""){
+        res.json({
+          status: 500,
+          message: "Not created",
+        });
+        return
+      }
 
       const createdUniversity = await model.postUniversity(name);
 
