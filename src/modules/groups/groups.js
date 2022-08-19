@@ -18,9 +18,16 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
-      const { name,directionId } = req.body;
+      const { name, directionId, courseId, educationId } = req.body;
 
-      const createdGroup = await model.postGroup( name, directionId );
+      const createdGroup = await model.postGroup(name);
+
+      await model.postMix(
+        directionId,
+        courseId,
+        educationId,
+        createdGroup.group_id
+      );
 
       if (createdGroup) {
         res.json({
@@ -38,14 +45,13 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
-    const { id, name, directionId } = req.body;
+    const { id, name } = req.body;
     try {
       const [oldData] = await model.selectedGroup(id);
 
       const Name = name ? name : oldData.group_name;
-      const DirectionId = directionId ? directionId : oldData.direction_id;
 
-      await model.updateGroups(Name, DirectionId, id);
+      await model.updateGroups(Name, id);
 
       res.json({
         status: 200,
