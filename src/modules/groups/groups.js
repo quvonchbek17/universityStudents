@@ -20,6 +20,13 @@ module.exports = {
     try {
       const { name, directionId, courseId, educationId } = req.body;
 
+      if(name && directionId && courseId && educationId){
+        res.json({
+          status: 500,
+          message: "Not created",
+        });
+        return
+      }
       const createdGroup = await model.postGroup(name);
 
       await model.postMix(

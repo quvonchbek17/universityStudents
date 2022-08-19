@@ -20,6 +20,13 @@ module.exports = {
     try {
       const { name, universityId } = req.body;
 
+      if(name && universityId){
+        res.json({
+          status: 500,
+          message: "Not created",
+        });
+        return
+      }
       const createdFaculty = await model.postFaculty(name, universityId);
       console.log(createdFaculty);
 

@@ -20,7 +20,16 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
+
       const { name, facultyId } = req.body;
+
+      if(name && facultyId){
+        res.json({
+          status: 500,
+          message: "Not created",
+        });
+        return
+      }
 
       const createdDirection = await model.postDirection(name, facultyId);
 
