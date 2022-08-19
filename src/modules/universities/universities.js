@@ -12,7 +12,7 @@ module.exports = {
     try {
       const { name } = req.body;
 
-      if(name){
+      if(!name){
         res.json({
           status: 500,
           message: "Not created",

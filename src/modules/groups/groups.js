@@ -20,7 +20,7 @@ module.exports = {
     try {
       const { name, directionId, courseId, educationId } = req.body;
 
-      if(name && directionId && courseId && educationId){
+      if(!name || !directionId || !courseId || !educationId){
         res.json({
           status: 500,
           message: "Not created",

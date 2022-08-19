@@ -11,7 +11,7 @@ module.exports = {
   Post: async (req, res) => {
     try {
       const { name, teacher, room, day, startTime, groupId } = req.body;
-      if(name && teacher && room && day && startTime && groupId){
+      if(!name || !teacher || !room || !day || !startTime || !groupId){
         res.json({
           status: 500,
           message: "Not created",

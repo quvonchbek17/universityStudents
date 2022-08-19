@@ -20,7 +20,7 @@ module.exports = {
     try {
       const { name, universityId } = req.body;
 
-      if(name && universityId){
+      if(!name || !universityId){
         res.json({
           status: 500,
           message: "Not created",
