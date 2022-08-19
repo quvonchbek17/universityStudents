@@ -73,7 +73,6 @@ CREATE TABLE schedules(
         FOREIGN KEY(group_id)
         REFERENCES groups(group_id)
         ON DELETE CASCADE
-
 );
 
 CREATE TABLE botusers(
