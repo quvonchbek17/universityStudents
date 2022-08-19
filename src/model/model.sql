@@ -30,6 +30,11 @@ CREATE TABLE groups(
     group_name VARCHAR(255)
 );
 
+CREATE TABLE courses (
+    course_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
+    course_number int not null
+);
+
 create table education (
     education_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     education_name text not null
