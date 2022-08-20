@@ -1,7 +1,7 @@
 const { fetchData } = require("../../utils/postgres");
 
 const ALL_GROUPS = `
-    Select * from groups
+    Select * from groups order by group_name
 `;
 
 const GROUPS = `

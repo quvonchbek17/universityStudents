@@ -1,11 +1,11 @@
 const { fetchData } = require("../../utils/postgres");
 
 const ALL_FACULTIES = `
-    Select * from faculties
+    Select * from faculties order by faculty_name
 `;
 
 const FACULTIES = `
-    Select * from faculties where university_id = $1
+    Select * from faculties where university_id = $1 order by faculty_name
 `;
 
 const SELECTED_FACULTY = `

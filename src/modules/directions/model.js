@@ -1,11 +1,11 @@
 const { fetchData } = require("../../utils/postgres");
 
 const ALL_DIRECTIONS = `
-    Select * from directions
+    Select * from directions order by direction_name
 `;
 
 const DIRECTIONS = `
-    Select * from directions where faculty_id = $1
+    Select * from directions where faculty_id = $1 order by direction_name
 `;
 
 const SELECTED_DIRECTION = `
