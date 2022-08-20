@@ -1,7 +1,7 @@
 const { fetchData } = require("../../utils/postgres");
 
 const ADMIN = `
-    Select * from facultyandsiteadmins where admin_name = $1 and admin_password = $2
+    Select * from systemadmins where admin_name = $1 and admin_password = $2
 `;
 
 
