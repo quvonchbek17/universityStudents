@@ -28,7 +28,6 @@ module.exports = {
         return
       }
       const createdFaculty = await model.postFaculty(name, universityId);
-      console.log(createdFaculty);
 
       if (createdFaculty) {
         res.json({

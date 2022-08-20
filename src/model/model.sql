@@ -50,9 +50,9 @@ create table mix(
         FOREIGN KEY(direction_id)
         REFERENCES directions(direction_id)
         ON DELETE CASCADE,
-    tizim_id uuid,
-        FOREIGN KEY(tizim_id)
-        REFERENCES tizim(tizim_id)
+    education_id uuid,
+        FOREIGN KEY(education_id)
+        REFERENCES education(education_id)
         ON DELETE CASCADE,
     group_id uuid,
         FOREIGN KEY(group_id)
@@ -88,7 +88,7 @@ CREATE TABLE botusers(
         ON DELETE SET NULL
 );
 
-CREATE TABLE facultyandsiteadmins(
+CREATE TABLE systemadmins(
     admin_id uuid DEFAULT uuid_generate_v4() NOT NULL PRIMARY KEY,
     admin_name VARCHAR(60),
     admin_password VARCHAR(60),
@@ -117,10 +117,6 @@ CREATE TABLE botadmins(
         ON DELETE SET NULL
 );
 
-INSERT INTO faculties(faculty_name, university_id) VALUES('AMIT', 'unId'), ('Fizika', 'unId'), ('Kimyo', 'unId')
-INSERT INTO directions(direction_name, faculty_id) VALUES('Axborot tizimlari va texnologiyalari', 'AMITID'),('Axborot xavfsizligi', 'AMITID'),('KIDT', 'AMITID'),
-('Amaliy matematika', 'AMITID'),
-
-
-INSERT INTO tizim(tizim_name) VALUES('Kunduzgi'), ('Kechki'), ('Sirtqi');
-INSERT INTO courses(course_number) VALUES(1), (2), (3), (4);
+INSERT INTO systemadmins(admin_name, admin_password, admin_role) VALUES('admin', 'admin12345', 'superadmin');
+INSERT INTO systemadmins(admin_name, admin_password, admin_role, faculty_id) VALUES('amitadmin', 'amit12345', 'facultyAdmin', 'b7baefb9-fe14-49ad-976d-0a933d3fb760');
+INSERT INTO systemadmins(admin_name, admin_password, admin_role, university_id) VALUES('nuuadmin', 'nuu12345', 'universityAdmin', '6fc4d6b4-cc4d-45fe-80eb-12dcf13ceb47');
