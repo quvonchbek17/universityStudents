@@ -21,8 +21,9 @@ module.exports = {
   Post: async (req, res) => {
     try {
 
-      const { name, facultyId } = req.body;
-
+      const { name, token } = req.body;
+      const data = verify(token)
+      const facultyId = data.facultyId
       if(!name || !facultyId){
         res.json({
           status: 500,
