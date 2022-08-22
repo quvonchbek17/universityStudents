@@ -53,9 +53,9 @@ module.exports = {
   },
   Update: async (req, res) => {
     const { id, name } = req.body;
+
     try {
       const [oldData] = await model.selectedGroup(id);
-
       const Name = name ? name : oldData.group_name;
 
       await model.updateGroups(Name, id);
@@ -65,6 +65,7 @@ module.exports = {
         message: "Updated",
       });
     } catch (err) {
+      console.log(err);
       res.sendStatus(500);
     }
   },

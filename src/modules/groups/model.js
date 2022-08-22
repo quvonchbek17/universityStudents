@@ -27,7 +27,7 @@ const POST_GROUP = `
 `;
 
 const UPDATE_GROUPS = `
- Update groups set group_name = $1,  where group_id = $2
+ Update groups set group_name = $1 where group_id = $2
 `;
 
 const DELETE_GROUPS = `
