@@ -8,6 +8,8 @@ const groups = require("./groups/groups");
 const schedules = require("./schedules/schedules");
 const users = require("./users/users");
 const login = require("./login/login")
+const education = require("./educations/education")
+const courses = require("./courses/course")
 
 router
   .get("/universities", universities.GetAll)
@@ -17,6 +19,8 @@ router
   .get("/directions/:token", directions.GetDirections)
   .get("/schedules", schedules.GetAll)
   .get("/groups", groups.GetAll)
+  .get("/educations", education.GetAll)
+  .get("/courses", courses.GetAll)
   .get("/groups/:directionId", groups.GetGroups)
   .get("/users", users.GetAll)
   .post("/login", login.token)
