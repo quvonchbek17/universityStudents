@@ -14,7 +14,7 @@ const GROUPS = `
     inner join
     education e on e.education_id = m.education_id
     inner join
-    direction d on d.direction_id = m.direction_id
+    directions d on d.direction_id = m.direction_id
     where d.direction_id = $1
 `;
 
