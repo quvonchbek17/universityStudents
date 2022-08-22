@@ -117,6 +117,3 @@ CREATE TABLE botadmins(
         ON DELETE SET NULL
 );
 
-INSERT INTO systemadmins(admin_name, admin_password, admin_role) VALUES('admin', 'admin12345', 'superadmin');
-INSERT INTO systemadmins(admin_name, admin_password, admin_role, faculty_id) VALUES('amitadmin', 'amit12345', 'facultyAdmin', 'b7baefb9-fe14-49ad-976d-0a933d3fb760');
-INSERT INTO systemadmins(admin_name, admin_password, admin_role, university_id) VALUES('nuuadmin', 'nuu12345', 'universityAdmin', '6fc4d6b4-cc4d-45fe-80eb-12dcf13ceb47');
