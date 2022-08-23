@@ -33,7 +33,7 @@ module.exports = {
         directionId,
         courseId,
         educationId,
-        createdGroup.group_id
+        createdGroup[0].group_id
       );
 
       if (createdGroup) {
