@@ -8,6 +8,15 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+
+  GetSchedules: async (req, res) => {
+    try {
+      const {groupId} = req.params
+      res.json(await model.getLessons(groupId));
+    } catch (err) {
+      res.sendStatus(500);
+    }
+  },
   Post: async (req, res) => {
     try {
       const { name, teacher, room, day, startTime, groupId } = req.body;

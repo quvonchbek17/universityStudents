@@ -4,6 +4,10 @@ const ALL_SCHEDULES = `
     Select * from schedules
 `;
 
+const GET_SCHEDULES = `
+    Select * from schedules where group_id = $1
+`;
+
 const SELECTED_LESSON = `
     Select * from schedules where lesson_id = $1
 `;
@@ -20,6 +24,7 @@ Delete from schedules where lesson_id = $1 returning *
 `;
 
 const allLessons = () => fetchData(ALL_SCHEDULES);
+const getLessons = (groupId) => fetchData(GET_SCHEDULES, groupId);
 const selectedLesson = (lessonId) => fetchData(SELECTED_LESSON, lessonId);
 const postLesson = async (name, teacher, room, day, startTime, groupId) => {
   const created = await fetchData(
@@ -44,6 +49,7 @@ const deleteLesson = (id) => fetchData(DELETE_LESSON, id);
 
 module.exports = {
   allLessons,
+  getLessons,
   selectedLesson,
   postLesson,
   updateLesson,

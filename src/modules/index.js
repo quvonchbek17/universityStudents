@@ -18,6 +18,7 @@ router
   .get("/directions", directions.GetAll)
   .get("/directions/:token", directions.GetDirections)
   .get("/schedules", schedules.GetAll)
+  .get("/schedules/:groupId", schedules.GetSchedules)
   .get("/groups", groups.GetAll)
   .get("/educations", education.GetAll)
   .get("/courses", courses.GetAll)

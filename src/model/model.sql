@@ -117,3 +117,9 @@ CREATE TABLE botadmins(
         ON DELETE SET NULL
 );
 
+ lesson_id | lesson_name | lesson_teacher | lesson_room | lesson_day | start_time | group_id
+-----------+-------------+----------------+-------------+------------+------------+----------
+
+INSERT INTO schedules(lesson_name, lesson_teacher, lesson_room, lesson_day, start_time, group_id) VALUES
+('Berilganlar bazasi (maruza)','prof. M.Hakimov', 'A-413', 'dushanba', '14:00', '8349ae10-be1d-4b8d-a5ba-5d5cd3530014'),
+('Algoritmlar va berilganlar strukturalari (maruza)','prof.S.Gaynazarov', 'A-202', 'dushanba', '15:30', '8349ae10-be1d-4b8d-a5ba-5d5cd3530014');
