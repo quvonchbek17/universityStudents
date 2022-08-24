@@ -55,13 +55,14 @@ module.exports = {
       const Desc = name ? name : oldData.time_desc;
       const FacultyId = facultyId ? facultyId : oldData.faculty_id;
 
-      await model.updateScience(Desc, FacultyId, id);
+      await model.updateTime(Desc, FacultyId, id);
 
       res.json({
         status: 200,
         message: "Updated",
       });
     } catch (err) {
+        console.log(err);
       res.sendStatus(500);
     }
   },
