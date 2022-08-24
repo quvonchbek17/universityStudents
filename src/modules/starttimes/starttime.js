@@ -48,11 +48,11 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
-    const { id, desc, facultyId } = req.body;
+    const { id, name, facultyId } = req.body;
     try {
       const [oldData] = await model.selectedTime(id);
 
-      const Desc = desc ? desc : oldData.time_desc;
+      const Desc = name ? name : oldData.time_desc;
       const FacultyId = facultyId ? facultyId : oldData.faculty_id;
 
       await model.updateScience(Desc, FacultyId, id);
