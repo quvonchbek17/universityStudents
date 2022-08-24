@@ -1,65 +1,38 @@
 const model = require("./model");
-const { verify } = require("../../utils/jwt")
 
 module.exports = {
-  GetAll: async (req, res) => {
+  Get: async (req, res) => {
     try {
       res.json(await model.allAdmins());
     } catch (err) {
       res.sendStatus(500);
     }
   },
-  GetDirections: async (req, res) => {
-    try {
-      const { token } = req.params;
-      const adminData = verify(token)
-      res.json(await model.Directions(adminData.faculty_id));
-    } catch (err) {
-      res.sendStatus(500);
-    }
-  },
   Post: async (req, res) => {
+    const { name, password, role, universityId, facultyId } = req.body;
     try {
-
-      const { name, token } = req.body;
-      const data = verify(token)
-      const facultyId = data.facultyId
-      if(!name || !facultyId){
-        res.json({
-          status: 500,
-          message: "Not created",
-        });
-        return
+      if (role == "superadmin") {
+        await model.postSuperAdmin(name, password, role);
+      } else if (role == "universityadmin") {
+        await model.postUniversityAdmin(name, password, role, universityId);
+      } else if (role == "facultyadmin") {
+        await model.postFacultyAdmin(name, password, role, facultyId);
       }
-
-      const createdDirection = await model.postDirection(name, facultyId);
-
-      if (createdDirection) {
-        res.json({
-          status: 200,
-          message: "Created",
-        });
-      } else {
-        res.json({
-          status: 500,
-          message: "Not created",
-        });
-      }
+      return res.json({
+        status: 200,
+        message: "Created",
+      });
     } catch (err) {
-      res.sendStatus(500);
+      return res.json({
+        status: 500,
+        message: "Not created",
+      });
     }
   },
-
   Update: async (req, res) => {
-    const { id, name, facultyId } = req.body;
+    const { name, password, id } = req.body;
     try {
-      const [oldData] = await model.selectedDirection(id);
-
-      const Name = name ? name : oldData.direction_name;
-      const FacultyId = facultyId ? facultyId : oldData.faculty_id;
-
-      await model.updateDirection(Name, FacultyId, id);
-
+      await model.updateAdmin(name, password, id);
       res.json({
         status: 200,
         message: "Updated",
@@ -71,19 +44,11 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
-     const deleted = await model.deleteDirection(id);
-      if(deleted[0].direction_id){
-        res.json({
-          status: 200,
-          message: "Deleted",
-        });
-      } else {
-        res.json({
-          status: 404,
-          message: "Not deleted. Direction not found",
-        });
-      }
-
+      await model.deleteAdmin(id);
+      res.json({
+        status: 200,
+        message: "deleted",
+      });
     } catch (err) {
       res.sendStatus(500);
     }

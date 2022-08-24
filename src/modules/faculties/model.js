@@ -13,7 +13,7 @@ const SELECTED_FACULTY = `
 `;
 
 const POST_FACULTY = `
-    Insert into faculties(faculty_name, university_id) values($1, $2)
+    Insert into faculties(faculty_name, university_id) values($1, $2) returning *
 `;
 
 const UPDATE_FACULTY = `
