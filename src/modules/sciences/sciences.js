@@ -1,4 +1,5 @@
 const model = require("./model");
+const { verify } = require("../../utils/jwt")
 
 module.exports = {
   GetAll: async (req, res) => {
@@ -19,10 +20,9 @@ module.exports = {
   Post: async (req, res) => {
     try {
       const { name, token } = req.body;
-
-      const data = verify(token)
+      console.log(token);
       const facultyId = data.facultyId
-      
+
       if(!name || !facultyId){
         res.json({
           status: 500,
