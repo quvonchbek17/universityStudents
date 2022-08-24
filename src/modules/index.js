@@ -44,7 +44,7 @@ router
   .put("/universities", universities.Update)
   .put("/groups", groups.Update)
   .put("/sciences", sciences.Update)
-  .put("/sciences", times.Update)
+  .put("/times", times.Update)
   .delete("/schedules", schedules.Delete)
   .delete("/directions", directions.Delete)
   .delete("/faculties", faculties.Delete)
