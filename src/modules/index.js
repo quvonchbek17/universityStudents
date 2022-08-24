@@ -36,7 +36,7 @@ router
   .post("/directions", directions.Post)
   .post("/groups", groups.Post)
   .post("/sciences", sciences.Post)
-  .post("/times", times)
+  .post("/times", times.Post)
   .post("/schedules", schedules.Post)
   .put("/schedules", schedules.Update)
   .put("/directions", directions.Update)
