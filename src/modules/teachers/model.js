@@ -24,7 +24,7 @@ const allTeachers = () => fetchData(ALL_TEACHERS);
 
 const getTeachersByScience = (id) => fetchData(GET_SCIENCE_TEACHER, id);
 
-const addTeacher = (name, surname, scienceId, facultyId) => {
+const addTeacher = async (name, surname, scienceId, facultyId) => {
     const created = await fetchData(
         `Select * from teachers where teacher_name = $1,teacher_surname = $2,science_id = $3,faculty_id = $4`,
         name,surname,scienceId,facultyId

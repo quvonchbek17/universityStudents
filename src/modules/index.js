@@ -7,16 +7,12 @@ const directions = require("./directions/directions");
 const groups = require("./groups/groups");
 const schedules = require("./schedules/schedules");
 const users = require("./users/users");
-const login = require("./login/login");
-const education = require("./educations/education");
 const courses = require("./courses/course");
 const sciences = require("./sciences/sciences");
 const teachers = require("./teachers/teacher");
 const admin = require("./admins/admins");
 const login = require("./login/login");
 const education = require("./educations/education");
-const courses = require("./courses/course");
-const sciences = require("./sciences/sciences");
 const times = require("./starttimes/starttime");
 
 router
