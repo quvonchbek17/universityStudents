@@ -26,14 +26,13 @@ const getTeachersByScience = (id) => fetchData(GET_SCIENCE_TEACHER, id);
 
 const addTeacher = async (name, surname, scienceId, facultyId) => {
     const created = await fetchData(
-        `Select * from teachers where teacher_name = $1,teacher_surname = $2,science_id = $3,faculty_id = $4`,
-        name,surname,scienceId,facultyId
+        `Select * from teachers where teacher_name = $1 and teacher_surname = $2 and science_id = $3 and faculty_id = $4`,
+        name, surname , scienceId,facultyId
       );
       if (created.length > 0) {
-        return {message:"Bunday Ism va Familiyalik o'qituvchi mavjud"};
+        return null;
       } else {
-          fetchData(POST_TEACHERS, name, surname, scienceId, facultyId);
-          return {status:200,message:"Created"}
+        return  fetchData(POST_TEACHERS, name, surname, scienceId, facultyId);
       }
 }
 

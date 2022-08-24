@@ -18,15 +18,28 @@ module.exports = {
     }
   },
   Post: async (req, res) => {
-    const { name, surname, scienceId, token } = req.body;
-    const data = verify(token);
-    const facultyId = data.facultyId;
-
-    res.json(await model.addTeacher(name, surname, scienceId, facultyId));
-
     try {
+      const { name, surname, scienceId, token } = req.body;
+      // console.log(name, surname, scienceId, token);
+      const data = verify(token);
+      const facultyId = data.facultyId;
+
+      const created = await model.addTeacher(name, surname, scienceId, facultyId)
+      
+      if (created) {
+        res.json({
+          status: 200,
+          message: "Created"
+        });
+      } else {
+        res.json({
+          status: 500,
+          message: "Not created"
+        });
+      }
     } catch (err) {
-      res.send(sendStatus(500));
+      console.log(err);
+      res.sendStatus(500);
     }
   },
   Update: async (req, res) => {
