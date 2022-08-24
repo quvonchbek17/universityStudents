@@ -20,7 +20,7 @@ module.exports = {
   Post: async (req, res) => {
     try {
       const { name, token } = req.body;
-      console.log(token);
+      const data = verify(token)
       const facultyId = data.facultyId
 
       if(!name || !facultyId){
