@@ -11,6 +11,7 @@ const login = require("./login/login")
 const education = require("./educations/education")
 const courses = require("./courses/course")
 const sciences = require("./sciences/sciences")
+const times = require("./starttimes/starttime")
 
 router
   .get("/universities", universities.GetAll)
@@ -22,7 +23,9 @@ router
   .get("/schedules/:groupId", schedules.GetSchedules)
   .get("/groups", groups.GetAll)
   .get("/sciences", sciences.GetAll)
+  .get("/times", times.GetAll)
   .get("/sciences/:facultyId", sciences.GETSciences)
+  .get("/times/:facultyId", times.GETTimes)
   .get("/educations", education.GetAll)
   .get("/courses", courses.GetAll)
   .get("/groups/:directionId", groups.GetGroups)
@@ -33,6 +36,7 @@ router
   .post("/directions", directions.Post)
   .post("/groups", groups.Post)
   .post("/sciences", sciences.Post)
+  .post("/times", times)
   .post("/schedules", schedules.Post)
   .put("/schedules", schedules.Update)
   .put("/directions", directions.Update)
@@ -40,11 +44,13 @@ router
   .put("/universities", universities.Update)
   .put("/groups", groups.Update)
   .put("/sciences", sciences.Update)
+  .put("/sciences", times.Update)
   .delete("/schedules", schedules.Delete)
   .delete("/directions", directions.Delete)
   .delete("/faculties", faculties.Delete)
   .delete("/universities", universities.Delete)
   .delete("/groups", groups.Delete)
-  .delete("/sciences", sciences.Delete );
+  .delete("/sciences", sciences.Delete )
+  .delete("/times", times.Delete );
 
 module.exports = router;
