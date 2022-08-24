@@ -19,7 +19,7 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
-      const { desc, token } = req.body;
+      const { name, token } = req.body;
       const data = verify(token)
       const facultyId = data.facultyId
 
@@ -30,7 +30,7 @@ module.exports = {
         });
         return
       }
-      const createdTime = await model.postTime(desc, facultyId);
+      const createdTime = await model.postTime(name, facultyId);
 
       if (createdTime) {
         res.json({
