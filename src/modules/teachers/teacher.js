@@ -60,9 +60,9 @@ module.exports = {
     }
   },
   Delete: async (req, res) => {
-    const { teacherId } = req.body;
+    const { id } = req.body;
     try {
-      await model.deleteTeacher(teacherId);
+      await model.deleteTeacher(id);
       res.json({
         status: 200,
         message: "Deleted",
