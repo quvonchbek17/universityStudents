@@ -43,14 +43,14 @@ module.exports = {
   },
   Update: async (req, res) => {
     try {
-      const { name, surname, scienceId, level, teacherId } = req.body;
+      const { name, surname, scienceId, level, id } = req.body;
       const Data = await model.selectedTeacher(id);
       const oldData = Data[0];
       const Name = name ? name : oldData.teacher_name;
       const Surname = surname ? surname : oldData.teacher_surname;
       const ScienceId = scienceId ? scienceId : oldData.science_id;
       const Level = level ? level : oldData.teacher_level;
-      await model.updateTeacher(Name, Surname, ScienceId, Level, teacherId);
+      await model.updateTeacher(Name, Surname, ScienceId, Level, id);
       res.json({
         status: 200,
         message: "Updated",
