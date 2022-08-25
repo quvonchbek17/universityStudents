@@ -19,13 +19,12 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
-      const { name, surname, scienceId, token } = req.body;
-      // console.log(name, surname, scienceId, token);
+      const { name, surname, level, scienceId, token } = req.body;
       const data = verify(token);
       const facultyId = data.facultyId;
 
-      const created = await model.addTeacher(name, surname, scienceId, facultyId)
-      
+      const created = await model.addTeacher(name, surname, scienceId,level, facultyId)
+
       if (created) {
         res.json({
           status: 200,
@@ -43,9 +42,15 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
-    const { name, surname, scienceId, teacherId } = req.body;
     try {
-      await model.updateTeacher(name, surname, scienceId, teacherId);
+      const { name, surname, scienceId, level, teacherId } = req.body;
+      const Data = await model.selectedTeacher(id);
+      const oldData = Data[0];
+      const Name = name ? name : oldData.teacher_name;
+      const Surname = surname ? surname : oldData.teacher_surname;
+      const ScienceId = scienceId ? scienceId : oldData.science_id;
+      const Level = level ? level : oldData.teacher_level;
+      await model.updateTeacher(Name, Surname, ScienceId, Level, teacherId);
       res.json({
         status: 200,
         message: "Updated",

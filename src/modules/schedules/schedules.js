@@ -19,8 +19,8 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
-      const { name, teacher, room, day, startTime, groupId } = req.body;
-      if(!name || !teacher || !room || !day || !startTime || !groupId){
+      const { name, teacher, room, day, startTime, type, groupId } = req.body;
+      if(!name || !teacher || !room || !day || !startTime || !groupId || !type){
         res.json({
           status: 500,
           message: "Not created",
@@ -34,6 +34,7 @@ module.exports = {
         room,
         day,
         startTime,
+        type,
         groupId
       );
 
@@ -54,7 +55,7 @@ module.exports = {
   },
   Update: async (req, res) => {
     try {
-      const { id, name, teacher, room, day, startTime, groupId } = req.body;
+      const { id, name, teacher, room, day, startTime, type, groupId } = req.body;
 
       const Data = await model.selectedLesson(id);
       const oldData = Data[0];
@@ -64,9 +65,10 @@ module.exports = {
       const Room = room ? room : oldData.lesson_room;
       const Day = day ? day : oldData.lesson_day;
       const Time = startTime ? startTime : oldData.start_time;
+      const Type = type ? type : oldData.lesson_type;
       const GroupId = groupId ? groupId : oldData.group_id;
 
-      await model.updateLesson(id, Name, Teacher, Room, Day, Time, GroupId);
+      await model.updateLesson(id, Name, Teacher, Room, Day, Time, Type, GroupId);
 
       res.json({
         status: 200,
