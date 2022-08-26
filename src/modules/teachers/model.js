@@ -31,7 +31,7 @@ const getTeachersByScience = (id) => fetchData(GET_SCIENCE_TEACHER, id);
 
 const addTeacher = async (name, surname, scienceId,level, facultyId) => {
     const created = await fetchData(
-        `Select * from teachers where teacher_name = $1 and teacher_surname = $2 and science_id = $3 and teacher_level = $4 faculty_id = $5`,
+        `Select * from teachers where teacher_name = $1 and teacher_surname = $2 and science_id = $3 and teacher_level = $4 and faculty_id = $5`,
         name, surname , scienceId,level,facultyId
       );
       if (created.length > 0) {
