@@ -5,7 +5,7 @@ const ALL_SCHEDULES = `
 `;
 
 const GET_SCHEDULES = `
-    Select * from schedules where group_id = $1
+    Select s.lesson_id, s.lesson_name, s.lesson_room, s.lesson_teacher, s.lesson_type, s.start_time, s.lesson_day, s.group_id, e.education_name from schedules s inner join mix m on m.group_id = $1 inner join education e on m.education_id = e.education_id  where s.group_id = $1
 `;
 
 const SELECTED_LESSON = `
