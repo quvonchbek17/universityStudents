@@ -12,7 +12,7 @@ module.exports = {
   Get_By_Science: async (req, res) => {
     try {
       const { scienceId } = req.params;
-      res.json(await model.Get_By_Science(scienceId));
+      res.json(await model.getTeachersByScience(scienceId));
     } catch (err) {
       res.sendStatus(500);
     }
