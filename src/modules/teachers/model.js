@@ -17,7 +17,7 @@ Insert into teachers(teacher_name,teacher_surname,science_id,teacher_level,facul
 `;
 
 const UPDATE_TEACHER = `
-Update teachers set teacher_name = $1,teacher_surname = $2,science_id = $3, teacher_level = $4 where teacher_id = $5
+Update teachers set teacher_name = $1 ,teacher_surname = $2,science_id = $3, teacher_level = $4 where teacher_id = $5
 `;
 
 const DELETE_TEACHER = `
@@ -25,7 +25,7 @@ Delete from teachers where teacher_id = $1
 `;
 
 const allTeachers = () => fetchData(ALL_TEACHERS);
-const selectedTeacher = () => fetchData(SELECTED_TEACHER);
+const selectedTeacher = (id) => fetchData(SELECTED_TEACHER, id);
 
 const getTeachersByScience = (id) => fetchData(GET_SCIENCE_TEACHER, id);
 

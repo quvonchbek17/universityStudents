@@ -17,7 +17,7 @@ const POST_LESSON = `
 `;
 
 const UPDATE_LESSON = `
-    Update schedules set lesson_name = $2, lesson_teacher = $3, lesson_room = $4, lesson_day = $5, start_time = $6, lesson_type = $7 group_id = $8 where lesson_id = $1
+    Update schedules set lesson_name = $2, lesson_teacher = $3, lesson_room = $4, lesson_day = $5, start_time = $6, lesson_type = $7 ,group_id = $8 where lesson_id = $1
 `;
 const DELETE_LESSON = `
 Delete from schedules where lesson_id = $1 returning *

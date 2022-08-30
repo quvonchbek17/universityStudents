@@ -46,6 +46,13 @@ module.exports = {
       const { name, surname, scienceId, level, id } = req.body;
       const Data = await model.selectedTeacher(id);
       const oldData = Data[0];
+      if(!oldData){
+        res.json({
+          status: 404,
+          message: "Teacher not found"
+        })
+        return
+      }
       const Name = name ? name : oldData.teacher_name;
       const Surname = surname ? surname : oldData.teacher_surname;
       const ScienceId = scienceId ? scienceId : oldData.science_id;

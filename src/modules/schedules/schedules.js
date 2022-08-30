@@ -59,7 +59,13 @@ module.exports = {
 
       const Data = await model.selectedLesson(id);
       const oldData = Data[0];
-
+      if(!oldData){
+        res.json({
+          status: 404,
+          message: "Schedules not found"
+        })
+        return
+      }
       const Name = name ? name : oldData.lesson_name;
       const Teacher = teacher ? teacher : oldData.lesson_teacher;
       const Room = room ? room : oldData.lesson_room;
