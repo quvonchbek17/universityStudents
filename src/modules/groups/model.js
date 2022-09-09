@@ -31,7 +31,11 @@ const UPDATE_GROUPS = `
 `;
 
 const DELETE_GROUPS = `
-Delete from groups where group_id = $1 returning *; Delete from mix where group_id = $1
+Delete from groups where group_id = $1 returning *
+`;
+
+const DELETE_MIX = `
+Delete from mix where group_id = $1 returning *
 `;
 
 const POST_MIX = `
@@ -46,6 +50,7 @@ const postGroup = async (name) => fetchData(POST_GROUP, name);
 const updateGroups = (name, id) => fetchData(UPDATE_GROUPS, name, id);
 
 const deleteGroups = (id) => fetchData(DELETE_GROUPS, id);
+const deleteMix = (id) => fetchData(DELETE_MIX, id);
 
 const postMix = (directionId, courseId, educationId, groupId) =>
   fetchData(POST_MIX, directionId, courseId, educationId, groupId);
@@ -58,4 +63,5 @@ module.exports = {
   updateGroups,
   deleteGroups,
   postMix,
+  deleteMix
 };

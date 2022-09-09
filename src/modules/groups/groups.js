@@ -73,6 +73,7 @@ module.exports = {
     const { id } = req.body;
     try {
       const deleted = await model.deleteGroups(id);
+      await model.deleteMix(id);
       if(deleted[0].group_id){
         res.json({
           status: 200,
