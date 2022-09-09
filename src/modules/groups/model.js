@@ -31,7 +31,7 @@ const UPDATE_GROUPS = `
 `;
 
 const DELETE_GROUPS = `
-Delete from groups where group_id = $1 returning *
+Delete from groups where group_id = $1 returning *; Delete from mix where group_id = $1
 `;
 
 const POST_MIX = `

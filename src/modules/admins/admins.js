@@ -1,4 +1,5 @@
 const model = require("./model");
+const { verify } = require('../../utils/jwt')
 
 module.exports = {
   Get: async (req, res) => {
@@ -8,6 +9,29 @@ module.exports = {
       res.sendStatus(500);
     }
   },
+  verifyAdmin: async (req, res) => {
+    try {
+      const { token } = req.body;
+      const data = verify(token)
+      if(data.id){
+        return res.json({
+          status: 200,
+          message: "Confirmed",
+        });
+      } else {
+        return res.json({
+          status: 404,
+          message: "Not found",
+        });
+      }
+    } catch (err) {
+      return res.json({
+        status: 500,
+        message: "Not found",
+      });
+    }
+  },
+
   Post: async (req, res) => {
     const { name, password, role, universityId, facultyId } = req.body;
     try {

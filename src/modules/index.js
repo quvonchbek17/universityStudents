@@ -36,6 +36,7 @@ router
   .get("/teachers/:scienceId", teachers.Get_By_Science)
   .get("admins", admin.Get)
   .post("/login", login.token)
+  .post("/verifyadmin", admin.verifyAdmin)
   .post("/universities", universities.Post)
   .post("/faculties", faculties.Post)
   .post("/directions", directions.Post)
