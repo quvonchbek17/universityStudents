@@ -5,18 +5,17 @@ const router = require('./modules')
 const cors = require('cors')
 
 const whitelist = ['http://localhost:3000']
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) === -1) {
-      app.use('/*', (req, res) => res.sendStatus(404))
-      return
+
+app.use('/*', (req, res) => {
+    console.log(req.headers.host);
+    if(req.headers.host != 'localhost:3000'){
+        res.sendStatus(404)
     }
-  }
-}
+   }
+)
 
 dotenv.config()
 app.use(express.json())
-app.use(cors(corsOptions))
 app.use(router)
 app.use('/*', (req, res) => res.sendStatus(404))
 const port =  8080
