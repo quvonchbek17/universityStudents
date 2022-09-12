@@ -4,10 +4,15 @@ const app = express()
 const router = require('./modules')
 const cors = require('cors')
 
-var corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200
+const whitelist = ['http://localhost:3000']
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.indexOf(origin) === -1) {
+      return
+    }
   }
+}
+
 dotenv.config()
 app.use(express.json())
 app.use(cors(corsOptions))
