@@ -8,6 +8,7 @@ const whitelist = ['http://localhost:3000']
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) === -1) {
+      app.use('/*', (req, res) => res.sendStatus(404))
       return
     }
   }
