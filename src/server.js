@@ -15,17 +15,12 @@ const cors = require('cors')
 //    }
 // )
 
-var corsOptions = {
-    "origin": "http://207.154.246.125:3000",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
-  }
+
 
 
 dotenv.config()
 app.use(express.json())
-app.use(cors(corsOptions))
+app.use(cors({origin: "http://localhost:3000"}))
 app.use(router)
 app.use('/*', (req, res) => res.sendStatus(404))
 const port =  8080
