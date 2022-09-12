@@ -6,10 +6,8 @@ const cors = require('cors')
 
 dotenv.config()
 app.use(express.json())
-app.use(cors())
 app.use(router)
 app.use('/*', (req, res) => res.sendStatus(404))
 const port =  8080
 
 app.listen(port)
-
