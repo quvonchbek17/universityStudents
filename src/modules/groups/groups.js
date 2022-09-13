@@ -1,7 +1,11 @@
 const model = require("./model");
+const { ipverify } = require("../../utils/ipverify");
 
 module.exports = {
   GetAll: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     try {
       res.json(await model.allGroups());
     } catch (err) {
@@ -10,6 +14,9 @@ module.exports = {
   },
   GetGroups: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       const { directionId } = req.params;
       res.json(await model.Groups(directionId));
     } catch (err) {
@@ -18,14 +25,17 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       const { name, directionId, courseId, educationId } = req.body;
 
-      if(!name || !directionId || !courseId || !educationId){
+      if (!name || !directionId || !courseId || !educationId) {
         res.json({
           status: 500,
           message: "Not created",
         });
-        return
+        return;
       }
       const createdGroup = await model.postGroup(name);
 
@@ -52,6 +62,9 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id, name } = req.body;
 
     try {
@@ -70,11 +83,14 @@ module.exports = {
     }
   },
   Delete: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id } = req.body;
     try {
       const deleted = await model.deleteGroups(id);
       await model.deleteMix(id);
-      if(deleted[0].group_id){
+      if (deleted[0].group_id) {
         res.json({
           status: 200,
           message: "Deleted",
@@ -85,7 +101,6 @@ module.exports = {
           message: "Not deleted. Group not found",
         });
       }
-
     } catch (err) {
       res.sendStatus(500);
     }

@@ -1,31 +1,41 @@
 const model = require("./model");
+const { ipverify } = require("../../utils/ipverify");
 
 module.exports = {
   GetAll: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       res.json(await model.allFaculties());
     } catch (err) {
       res.sendStatus(500);
     }
   },
-  GETFaculties: async(req, res) => {
+  GETFaculties: async (req, res) => {
     try {
-      const { universityId } = req.params
-      res.json(await model.faculties(universityId))
+      if (ipverify(req, res)) {
+        return;
+      }
+      const { universityId } = req.params;
+      res.json(await model.faculties(universityId));
     } catch (error) {
-      res.status(500)
+      res.status(500);
     }
   },
   Post: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       const { name, universityId } = req.body;
 
-      if(!name || !universityId){
+      if (!name || !universityId) {
         res.json({
           status: 500,
           message: "Not created",
         });
-        return
+        return;
       }
       const createdFaculty = await model.postFaculty(name, universityId);
 
@@ -45,6 +55,9 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id, name, universityId } = req.body;
     try {
       const [oldData] = await model.selectedFaculty(id);
@@ -63,21 +76,23 @@ module.exports = {
     }
   },
   Delete: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id } = req.body;
     try {
-     const deleted = await model.deleteFaculty(id);
-     if(deleted[0]?.faculty_id){
-      res.json({
-        status: 200,
-        message: "Deleted",
-      });
-     } else {
-      res.json({
-        status: 404,
-        message: "Not deleted. Faculty not found",
-      });
-     }
-
+      const deleted = await model.deleteFaculty(id);
+      if (deleted[0]?.faculty_id) {
+        res.json({
+          status: 200,
+          message: "Deleted",
+        });
+      } else {
+        res.json({
+          status: 404,
+          message: "Not deleted. Faculty not found",
+        });
+      }
     } catch (err) {
       res.sendStatus(500);
     }

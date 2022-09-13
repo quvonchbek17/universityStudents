@@ -1,9 +1,13 @@
 const model = require("./model");
 const { verify } = require("../../utils/jwt")
+const { ipverify } = require('../../utils/ipverify')
 
 module.exports = {
   GetAll: async (req, res) => {
     try {
+      if(ipverify(req, res)){
+        return
+      }
       res.json(await model.allDirections());
     } catch (err) {
       res.sendStatus(500);
@@ -11,6 +15,9 @@ module.exports = {
   },
   GetDirections: async (req, res) => {
     try {
+            if(ipverify(req, res)){
+        return
+      }
       const { token } = req.params;
       const adminData = verify(token)
       res.json(await model.Directions(adminData.faculty_id));
@@ -20,7 +27,9 @@ module.exports = {
   },
   Post: async (req, res) => {
     try {
-
+            if(ipverify(req, res)){
+        return
+      }
       const { name, token } = req.body;
       const data = verify(token)
       const facultyId = data.facultyId
@@ -54,6 +63,9 @@ module.exports = {
   Update: async (req, res) => {
     const { id, name, facultyId } = req.body;
     try {
+            if(ipverify(req, res)){
+        return
+      }
       const [oldData] = await model.selectedDirection(id);
 
       const Name = name ? name : oldData.direction_name;
@@ -72,6 +84,9 @@ module.exports = {
   Delete: async (req, res) => {
     const { id } = req.body;
     try {
+            if(ipverify(req, res)){
+        return
+      }
      const deleted = await model.deleteDirection(id);
       if(deleted[0].direction_id){
         res.json({

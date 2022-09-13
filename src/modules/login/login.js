@@ -1,8 +1,13 @@
 const model = require("./model");
 const { sign } = require('../../utils/jwt')
+const { ipverify } = require('../../utils/ipverify')
+
 
 module.exports = {
   token: async(req, res) => {
+    if(ipverify(req, res)){
+      return
+    }
     try {
       const { adminName, password } = req.body;
 

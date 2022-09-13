@@ -5,22 +5,9 @@ const router = require('./modules')
 const cors = require('cors')
 
 
-// app.use('/*', (req, res) => {
-//     console.log(req.headers.origin);
-//     console.log(req.headers.origin != 'http://localhost:3000');
-//     if(req.headers.origin != 'http://localhost:3000'){
-//         res.sendStatus(404)
-//         return
-//     }
-//    }
-// )
-
-
-
-
 dotenv.config()
 app.use(express.json())
-app.use(cors({origin: "http://localhost:3000"}))
+app.use(cors())
 app.use(router)
 app.use('/*', (req, res) => res.sendStatus(404))
 const port =  8080

@@ -1,34 +1,44 @@
 const model = require("./model");
-const { verify } = require("../../utils/jwt")
+const { verify } = require("../../utils/jwt");
+const { ipverify } = require("../../utils/ipverify");
 
 module.exports = {
   GetAll: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       res.json(await model.allSciences());
     } catch (err) {
       res.sendStatus(500);
     }
   },
-  GETSciences: async(req, res) => {
+  GETSciences: async (req, res) => {
     try {
-      const { facultyId } = req.params
-      res.json(await model.getSciences(facultyId))
+      if (ipverify(req, res)) {
+        return;
+      }
+      const { facultyId } = req.params;
+      res.json(await model.getSciences(facultyId));
     } catch (error) {
-      res.status(500)
+      res.status(500);
     }
   },
   Post: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       const { name, token } = req.body;
-      const data = verify(token)
-      const facultyId = data.facultyId
+      const data = verify(token);
+      const facultyId = data.facultyId;
 
-      if(!name || !facultyId){
+      if (!name || !facultyId) {
         res.json({
           status: 500,
           message: "Not created",
         });
-        return
+        return;
       }
       const createdScience = await model.postScience(name, facultyId);
 
@@ -48,6 +58,9 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id, name, facultyId } = req.body;
     try {
       const [oldData] = await model.selectedScience(id);
@@ -66,21 +79,23 @@ module.exports = {
     }
   },
   Delete: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id } = req.body;
     try {
-     const deleted = await model.deleteScience(id);
-     if(deleted[0]?.science_id){
-      res.json({
-        status: 200,
-        message: "Deleted",
-      });
-     } else {
-      res.json({
-        status: 404,
-        message: "Not deleted. Science not found",
-      });
-     }
-
+      const deleted = await model.deleteScience(id);
+      if (deleted[0]?.science_id) {
+        res.json({
+          status: 200,
+          message: "Deleted",
+        });
+      } else {
+        res.json({
+          status: 404,
+          message: "Not deleted. Science not found",
+        });
+      }
     } catch (err) {
       res.sendStatus(500);
     }

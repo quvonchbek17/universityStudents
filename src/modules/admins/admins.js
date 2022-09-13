@@ -1,9 +1,13 @@
 const model = require("./model");
-const { verify } = require('../../utils/jwt')
+const { verify } = require("../../utils/jwt");
+const { ipverify } = require("../../utils/ipverify");
 
 module.exports = {
   Get: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       res.json(await model.allAdmins());
     } catch (err) {
       res.sendStatus(500);
@@ -11,9 +15,12 @@ module.exports = {
   },
   verifyAdmin: async (req, res) => {
     try {
+      if (ipverify(req, res)) {
+        return;
+      }
       const { token } = req.body;
-      const data = verify(token)
-      if(data.id){
+      const data = verify(token);
+      if (data.id) {
         return res.json({
           status: 200,
           message: "Confirmed",
@@ -33,6 +40,9 @@ module.exports = {
   },
 
   Post: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { name, password, role, universityId, facultyId } = req.body;
     try {
       if (role == "superadmin") {
@@ -54,6 +64,9 @@ module.exports = {
     }
   },
   Update: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { name, password, id } = req.body;
     try {
       await model.updateAdmin(name, password, id);
@@ -66,6 +79,9 @@ module.exports = {
     }
   },
   Delete: async (req, res) => {
+    if (ipverify(req, res)) {
+      return;
+    }
     const { id } = req.body;
     try {
       await model.deleteAdmin(id);
