@@ -1,5 +1,5 @@
 const ipverify = (req, res) => {
-  if (req.headers.origin != "http://207.154.246.125:3000") {
+  if (req.headers.origin != "http://207.154.246.125") {
     res.sendStatus(404);
     return true ;
   } else {
